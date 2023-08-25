@@ -9,7 +9,9 @@ namespace 코딩연습
             Console.WriteLine("Hello, World!");
         }
         
-
+        /// <summary>
+        /// 평균구하기
+        /// </summary>
     public class Solution
         {
             public double solution(int[] arr)
@@ -35,4 +37,61 @@ namespace 코딩연습
         }
 
     }
+    /// <summary>
+    /// 홀짝구분하기
+    /// </summary>
+    public class Solution
+    {
+        public string solution(int num)
+        {
+            if (num % 2 == 0)
+            {
+                return "Even";
+            }
+            else
+            {
+                return "Odd";
+            }
+        }
+    }
+
+    // 자릿수 더하기
+    public class Solution
+    {
+        public int solution(int n)
+        {
+            int sum = 0;
+            while (n > 0)
+            {
+                sum += n % 10; // 마지막 자릿수 추출
+                n /= 10; // 마지막 자릿수 제거
+            }
+
+
+            return sum;
+        }
+    }
+
+
+    //약수의 합
+    public class Solution
+    {
+        public int solution(int n)
+        {
+            int sum = 0;
+
+            for (int i = 1; i <= n; i++)
+            {
+                if (n % i == 0)
+                {
+                    sum += i;
+                }
+            }
+
+
+            return sum;
+        }
+    }
+
+
 }
