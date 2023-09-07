@@ -327,3 +327,77 @@ public class Solution
             return sum;
         }
     }
+
+    //핸드폰 번호 가리기
+    using System;
+
+public class Solution
+    {
+
+
+        public string solution(string phone_number)
+        {
+            int len = phone_number.Length;
+
+            // 전화번호의 뒷 4자리를 제외한 나머지를 '*'로 변환
+            string hiddenPart = new String('*', len - 4);
+
+            // 숨겨진 부분과 원래 전화번호의 뒷 4자리를 합쳐서 반환
+            return hiddenPart + phone_number.Substring(len - 4);
+        }
+
+    }
+    //없는 숫자 더하기
+    using System;
+using System.Linq;
+
+public class Solution
+    {
+        public int solution(int[] numbers)
+        {
+            // 0부터 9까지의 합은 45이므로
+            int total = 45;
+
+            // numbers에 포함된 숫자들을 전체 합에서 빼면
+            // numbers에 없는 숫자들의 합을 얻을 수 있습니다.
+            return total - numbers.Sum();
+        }
+    }
+
+    //제일 작은 수 제거하기
+    using System;
+using System.Linq;
+
+public class Solution
+    {
+        public int[] solution(int[] arr)
+        {
+            if (arr.Length <= 1)
+            {
+                return new int[] { -1 };
+            }
+
+            int minValue = arr.Min(); // 배열에서 가장 작은 값을 찾습니다.
+            return arr.Where(n => n != minValue).ToArray(); // 가장 작은 값을 제외한 배열을 반환합니다.
+        }
+    }
+
+    // 가운데 글자 가져오기
+
+    public class Solution
+    {
+        public string solution(string s)
+        {
+            int length = s.Length;
+            if (length % 2 == 0)
+            {
+                // 짝수인 경우 중간의 두 글자 반환
+                return s.Substring(length / 2 - 1, 2);
+            }
+            else
+            {
+                // 홀수인 경우 중간의 한 글자 반환
+                return s.Substring(length / 2, 1);
+            }
+        }
+    }
