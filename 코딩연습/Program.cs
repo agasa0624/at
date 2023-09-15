@@ -401,3 +401,258 @@ public class Solution
             }
         }
     }
+
+//약수의 개수와 덧셈
+using System;
+
+public class Solution
+    {
+        public int solution(int left, int right)
+        {
+            int answer = 0;
+            for (int i = left; i <= right; i++)
+            {
+                if (IsEvenDivisorCount(i))
+                {
+                    answer += i;
+                }
+                else
+                {
+                    answer -= i;
+                }
+            }
+            return answer;
+        }
+
+        // 약수의 개수가 짝수인지 홀수인지 판별하는 함수
+        private bool IsEvenDivisorCount(int num)
+        {
+            int count = 0;
+            for (int i = 1; i <= num; i++)
+            {
+                if (num % i == 0)
+                {
+                    count++;
+                }
+            }
+            return count % 2 == 0;
+        }
+    }
+
+    //문자열 내림차순으로 배치하기
+    using System;
+using System.Linq;
+
+public class Solution
+    {
+        public string solution(string s)
+        {
+            return new string(s.OrderByDescending(c => c).ToArray());
+        }
+    }
+
+    //부족한 금액 계산하기
+    public class Solution
+    {
+        public long solution(int price, int money, int count)
+        {
+            long totalCost = (long)price * count * (count + 1) / 2;
+            long lack = totalCost - money;
+
+            return lack > 0 ? lack : 0;
+        }
+    }
+
+
+    //문자열 다루기 기본
+   using System;
+using System.Linq;
+
+public class Solution
+    {
+        public bool solution(string s)
+        {
+            if (s.Length == 4 || s.Length == 6)
+            {
+                return s.All(char.IsDigit);
+            }
+            return false;
+        }
+    }
+
+    
+    //행렬의 덧셈
+
+    using System;
+
+public class Solution
+    {
+        public int[,] solution(int[,] arr1, int[,] arr2)
+        {
+            int rows = arr1.GetLength(0);
+            int cols = arr1.GetLength(1);
+
+            int[,] result = new int[rows, cols];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    result[i, j] = arr1[i, j] + arr2[i, j];
+                }
+            }
+
+            return result;
+        }
+    }
+
+    //직사각형 별찍기
+
+    using System;
+
+public class Program
+    {
+        public static void Main()
+        {
+            int n = GetValidNumber("Enter n:");
+            int m = GetValidNumber("Enter m:");
+
+            for (int i = 0; i < m; i++)
+            {
+                Console.WriteLine(new string('*', n));
+            }
+        }
+
+        static int GetValidNumber(string prompt)
+        {
+            int number;
+            Console.WriteLine(prompt);
+            while (!int.TryParse(Console.ReadLine(), out number))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                Console.WriteLine(prompt);
+            }
+            return number;
+        }
+    }
+
+    //최대공약수와 최소공배수
+    public class Solution
+    {
+        public int[] solution(int n, int m)
+        {
+            int gcd = GCD(n, m);
+            int lcm = n * m / gcd;
+
+            return new int[] { gcd, lcm };
+        }
+
+        private int GCD(int a, int b)
+        {
+            while (b != 0)
+            {
+                int temp = a % b;
+                a = b;
+                b = temp;
+            }
+            return a;
+        }
+    }
+
+    //3진법 뒤집기
+    public class Solution
+    {
+        public int solution(int n)
+        {
+            string reversedTernary = "";
+
+            // n을 3진법으로 변환하면서 그 값을 반대로 뒤집는다.
+            while (n > 0)
+            {
+                reversedTernary += n % 3;
+                n /= 3;
+            }
+
+            // 뒤집힌 3진법 값을 다시 10진법으로 변환한다.
+            int result = 0;
+            int multiplier = 1;
+            for (int i = reversedTernary.Length - 1; i >= 0; i--)
+            {
+                result += (reversedTernary[i] - '0') * multiplier;
+                multiplier *= 3;
+            }
+
+            return result;
+        }
+    }
+
+    //이상한 문자 만들기
+    public class Solution
+    {
+        public string solution(string s)
+        {
+            string[] words = s.Split(' ');
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                char[] chars = words[i].ToCharArray();
+                for (int j = 0; j < chars.Length; j++)
+                {
+                    if (j % 2 == 0)
+                    {
+                        chars[j] = char.ToUpper(chars[j]);
+                    }
+                    else
+                    {
+                        chars[j] = char.ToLower(chars[j]);
+                    }
+                }
+                words[i] = new string(chars);
+            }
+
+            return string.Join(" ", words);
+        }
+    }
+
+    //소수 만들기
+    
+public class Solution
+    {
+        public int solution(int[] nums)
+        {
+            int answer = 0;
+
+            // 3중 for 문을 사용하여 3개의 숫자 조합을 모두 검사합니다.
+            for (int i = 0; i < nums.Length - 2; i++)
+            {
+                for (int j = i + 1; j < nums.Length - 1; j++)
+                {
+                    for (int k = j + 1; k < nums.Length; k++)
+                    {
+                        int sum = nums[i] + nums[j] + nums[k];
+                        if (IsPrime(sum))
+                        {
+                            answer++;
+                        }
+                    }
+                }
+            }
+
+            return answer;
+        }
+
+        private bool IsPrime(int num)
+        {
+            if (num <= 1) return false;
+            if (num == 2) return true;
+
+            for (int i = 2; i * i <= num; i++)
+            {
+                if (num % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
