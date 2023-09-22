@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace 코딩연습
 {
@@ -184,7 +185,51 @@ public class Solution
     }
 
 
+    //수박수박수박수박수박수?
 
+    using System;
+
+public class Solution
+    {
+        public string solution(int n)
+        {
+            string result = "";
+
+            for (int i = 0; i < n; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    result += "수";
+                }
+                else
+                {
+                    result += "박";
+                }
+            }
+
+            return result;
+        }
+    }
+
+
+    //내적
+
+    using System;
+
+public class Solution
+    {
+        public int solution(int[] a, int[] b)
+        {
+            int answer = 0;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                answer += a[i] * b[i];
+            }
+
+            return answer;
+        }
+    }
 
     //정수 내림차순으로 배치하기
     using System;
@@ -654,5 +699,307 @@ public class Solution
             }
 
             return true;
+        }
+    }
+
+    //삼총사
+
+    using System;
+using System.Collections.Generic;
+
+public class Solution
+    {
+        public int solution(int[] number)
+        {
+            int answer = 0;
+            int n = number.Length;
+
+            // 세 학생의 조합을 찾기 위한 3중 for문
+            for (int i = 0; i < n - 2; i++)
+            {
+                for (int j = i + 1; j < n - 1; j++)
+                {
+                    for (int k = j + 1; k < n; k++)
+                    {
+                        // 해당 학생들의 번호 합이 0인지 확인
+                        if (number[i] + number[j] + number[k] == 0)
+                        {
+                            answer++;
+                        }
+                    }
+                }
+            }
+            return answer;
+        }
+    }
+
+
+    // 크기가 작은 부분문자열
+    public class Solution
+    {
+        public int solution(string t, string p)
+        {
+            int count = 0;
+            long pValue = long.Parse(p);
+            int pLength = p.Length;
+
+            for (int i = 0; i <= t.Length - pLength; i++)
+            {
+                string subString = t.Substring(i, pLength);
+                long subValue = long.Parse(subString);
+                //int.parse를 사용하면 롱타임 에러 발생하여 long숫자 사용
+                if (subValue <= pValue)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+    }
+
+    //최소 직사각형 만들기
+    
+    using System;
+
+public class Solution
+    {
+        public int solution(int[,] sizes)
+        {
+            int maxWidth = 0;
+            int maxHeight = 0;
+
+            int len = sizes.GetLength(0);
+
+            for (int i = 0; i < len; i++)
+            {
+                int w = sizes[i, 0];
+                int h = sizes[i, 1];
+
+                int maxSide = Math.Max(w, h);
+                int minSide = Math.Min(w, h);
+
+                maxWidth = Math.Max(maxWidth, maxSide);
+                maxHeight = Math.Max(maxHeight, minSide);
+            }
+
+            return maxWidth * maxHeight;
+        }
+    }
+
+    public class Program
+    {
+        public static void TestMain()
+        {
+            Solution sol = new Solution();
+            int[,] sizes = {
+            {60, 50},
+            {30, 70},
+            {60, 30},
+            {80, 40}
+        };
+            int result = sol.solution(sizes);
+            Console.WriteLine(result); // Expected output: 4000
+        }
+    }
+
+    //시저 암호
+    public class Solution
+    {
+        public string solution(string s, int n)
+        {
+            char[] arr = s.ToCharArray();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (char.IsLetter(arr[i]))
+                {
+                    char offset = char.IsUpper(arr[i]) ? 'A' : 'a';
+                    arr[i] = (char)(offset + (arr[i] + n - offset) % 26);
+                }
+            }
+
+            return new string(arr);
+        }
+    }
+    //숫자 문자열과 영단어
+
+    using System;
+using System.Collections.Generic;
+
+public class Solution
+    {
+        public int solution(string s)
+        {
+            // 숫자와 그에 해당하는 영단어의 대응을 딕셔너리에 저장합니다.
+            Dictionary<string, string> numberMap = new Dictionary<string, string>() {
+            {"zero", "0"},
+            {"one", "1"},
+            {"two", "2"},
+            {"three", "3"},
+            {"four", "4"},
+            {"five", "5"},
+            {"six", "6"},
+            {"seven", "7"},
+            {"eight", "8"},
+            {"nine", "9"}
+        };
+
+            // 영단어를 숫자로 변환
+            foreach (var pair in numberMap)
+            {
+                s = s.Replace(pair.Key, pair.Value);
+            }
+
+            return int.Parse(s);
+        }
+    }
+
+    //문자열 내 마음대로 정렬하기
+
+    using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public class Solution
+    {
+        public string[] solution(string[] strings, int n)
+        {
+            return strings.OrderBy(s => s[n]).ThenBy(s => s).ToArray();
+        }
+
+    }
+
+    //K번째수
+    using System;
+using System.Linq;
+
+public class Solution
+    {
+        public int[] solution(int[] array, int[,] commands)
+        {
+            int[] result = new int[commands.GetLength(0)];
+
+            for (int i = 0; i < commands.GetLength(0); i++)
+            {
+                int startIndex = commands[i, 0] - 1;
+                int endIndex = commands[i, 1] - 1;
+                int kIndex = commands[i, 2] - 1;
+
+                var subArray = array.Skip(startIndex).Take(endIndex - startIndex + 1).ToArray();
+                Array.Sort(subArray);
+
+                result[i] = subArray[kIndex];
+            }
+
+            return result;
+        }
+    }
+
+    //두 개 뽑아서 도하기
+    using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution
+    {
+        public int[] solution(int[] numbers)
+        {
+            HashSet<int> resultSet = new HashSet<int>();
+
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                for (int j = i + 1; j < numbers.Length; j++)
+                {
+                    resultSet.Add(numbers[i] + numbers[j]);
+                }
+            }
+
+            return resultSet.OrderBy(x => x).ToArray();
+        }
+
+        // 테스트를 위한 메인 함수
+        /*
+        public static void Main(string[] args) {
+            Solution sol = new Solution();
+
+            var numbers = new int[] {2, 1, 3, 4, 1};
+            var result = sol.solution(numbers);
+            foreach (var num in result) {
+                Console.WriteLine(num);  // 예상 출력: 2, 3, 4, 5, 6, 7
+            }
+        }
+        */
+    }
+
+    //가장 가까운 같은 글자
+    using System.Collections.Generic;
+
+public class Solution
+    {
+        public int[] solution(string s)
+        {
+            int[] result = new int[s.Length];
+            Dictionary<char, int> lastPosition = new Dictionary<char, int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (lastPosition.ContainsKey(s[i]))
+                {
+                    result[i] = i - lastPosition[s[i]];
+                }
+                else
+                {
+                    result[i] = -1;
+                }
+
+                lastPosition[s[i]] = i;  // Update the last position of the character
+            }
+
+            return result;
+        }
+    }
+
+    //푸드 파이트 대회
+    using System;
+using System.Linq;
+using System.Text;
+
+public class Solution
+    {
+        public string solution(int[] food)
+        {
+            StringBuilder left = new StringBuilder();
+            StringBuilder right = new StringBuilder();
+
+            int totalFood = (food.Sum() - 1) / 2; // 전체 음식에서 물을 제외하고 반으로 나눔
+
+            for (int i = food.Length - 1; i >= 1; i--)
+            {
+                if (totalFood <= 0) break;
+
+                int toEat = Math.Min(food[i] / 2, totalFood);
+
+                left.Insert(0, new string((char)('0' + i), toEat));
+                right.Append(new string((char)('0' + i), toEat));
+
+                food[i] -= toEat * 2; // 두 선수가 먹으므로 2배만큼 감소
+                totalFood -= toEat;
+            }
+
+            // 중앙에 물 추가
+            left.Append('0');
+
+            // 남은 음식 배치
+            for (int i = 1; i < food.Length; i++)
+            {
+                if (food[i] > 0)
+                {
+                    left.Insert(0, new string((char)('0' + i), food[i] / 2));
+                    right.Append(new string((char)('0' + i), food[i] / 2));
+                }
+            }
+
+            return left.ToString() + right.ToString();
         }
     }
